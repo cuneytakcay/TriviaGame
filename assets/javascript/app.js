@@ -1,12 +1,11 @@
 $(function () {
-	// SET VARIABLES =====================================================
+	// SET VARIABLES ===================================================
 	var number = 0;
 	var correct = 0;
 	var wrong = 0;
 	var unanswered = 0;
-	//var optionSelected;
 
-	// SET QUESTIONS & ANSWERS ARRAYS ===============================================
+	// SET QUESTIONS & ANSWERS ARRAYS ==================================
 	var questions 	= [ { category: "Science", question: "What is the symbol for Silver?", answer: "Ag", image: "silver.png" },
 					    { category: "Music", question: "Les Paul is a model of which guitar maker?", answer: "Gibson", image: "les-paul.jpg" }, 
 					    { category: "Technology", question: "What was the name of the first home computer to be manufactured?", answer: "Altair", image: "altair.jpg" },
@@ -29,7 +28,7 @@ $(function () {
 						{ A: "1986", B: "1987", C: "1988", D: "1989" },
 						{ A: "AB negative", B: "O negative", C: "O positive", D: "AB Positive" } ];
 
-	// REFRESH PAGE ======================================================
+	// REFRESH PAGE ====================================================
 	function refreshPage() {
 
 		// Display the header on top -----------------------------------
@@ -47,13 +46,20 @@ $(function () {
 		timerSec.append(counter);
 		$("#container").append(timerSec);
 
-		// Timer counts down from 30 to 0 -----------------------------
+		// Timer counts down from 30 to 0 ------------------------------
 		var countDown = setInterval(function() {
 			remainingTime--;
 			counter = "<h2>Time remaining: " + remainingTime + "</h2>";
 			timerSec.html(counter);
 
+			if (remainingTime <= 5 && remainingTime > 0) {
+				var warning = new Audio("assets/sounds/beep.wav");
+				warning.play();
+			}
+
 			if (remainingTime === 0) {
+				var timesUp = new Audio("assets/sounds/times-up.wav");
+				timesUp.play();
 				clearInterval(countDown);
 				timerSec.html("<h2>Time is up!</h2>");
 				makeTransition();
@@ -63,21 +69,21 @@ $(function () {
 			}
 		}, 1000);
 
-		// Display the question category below the timer ------------------------
+		// Display the question info below the timer -------------------
 		var infoSec = $("<div id=\"info\">");
 		var info = "<h2>Question " + (number + 1) + " / " + questions[number].category + "</h2>";
 
 		infoSec.append(info);
 		$("#container").append(infoSec);
 
-		// Display the question below the info ----------------------------------
+		// Display the question below the info -------------------------
 		var questionSec = $("<div id=\"question\">");
 		var question = "<h1>" + questions[number].question + "</h1>";
 
 		questionSec.append(question);
 		$("#container").append(questionSec);
 
-		// Display the answer options below the question ------------------------
+		// Display the answer options below the question ---------------
 		var optionSelected = false;
 		var answerSec = $("<div id=\"answer\">");
 
@@ -106,7 +112,7 @@ $(function () {
 
 		$("#container").append(answerSec);
 
-		// Select the option to answer the question -----------------------------
+		// Select the option to answer the question --------------------
 		$(".btn-answer").on("click", function() {
 
 			clearInterval(countDown);
@@ -114,9 +120,13 @@ $(function () {
 			if (!optionSelected) {
 
 				if ($(this).text() === questions[number].answer) {
+					var sndCorrect = new Audio("assets/sounds/correct.wav");
+					sndCorrect.play();
 					infoSec.html("<h1>Correct!</h1>");
 					correct++;
 				} else {
+					var sndWrong = new Audio("assets/sounds/wrong.wav");
+					sndWrong.play();
 					infoSec.html("<h1>Wrong!</h1>");
 					wrong++;
 				}
@@ -126,7 +136,7 @@ $(function () {
 				number++;
 
 			}
-			// To avoid multiple selections.
+			// To avoid multiple selections in case the next display does not occur.
 			optionSelected = true;
 
 		})

@@ -6,8 +6,8 @@ body {
 #container {
 	background-color: #fff;
 	max-width: 960px;
-	height: 80vh;
-	margin: 40px auto;
+	min-height: 83vh;
+	margin: 30px auto;
 	text-align: center;
 	border-radius: 50px;
 	padding: 10px 20px 50px 20px;
@@ -48,7 +48,7 @@ button:hover {
 }
 
 #image-div {
-	height: 300px;
+	height: 275px;
 }
 
 #answer img {

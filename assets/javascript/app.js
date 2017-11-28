@@ -28,6 +28,26 @@ $(function () {
 						{ A: "1986", B: "1987", C: "1988", D: "1989" },
 						{ A: "AB negative", B: "O negative", C: "O positive", D: "AB Positive" } ];
 
+	// OPENING PAGE ====================================================
+	// Display the header on top -----------------------------------
+	var headerSec = $("<div id=\"header\">");
+	var logo = $("<img src=\"assets/images/trivia.png\">");
+	
+	headerSec.append(logo);
+	$("#container").append(headerSec);
+
+	// Create a start button.
+	var startGameBtn = $("<button id=\"btn-start\">Start Game</button>");
+	$("#container").append(startGameBtn);
+
+	// Refresh the page when start button is clicked.
+	$("#btn-start").on("click", function() {
+
+		$("#container").empty();
+		refreshPage();
+
+	})
+
 	// REFRESH PAGE ====================================================
 	function refreshPage() {
 
@@ -159,8 +179,8 @@ $(function () {
 				refreshPage();
 			} else {
 				$("#container").append("<img src=\"assets/images/game-over.png\" id=\"game-over\">");
-				$("#container").append("<h1>Correct Answer: " + correct + "</h1>");
-				$("#container").append("<h1>Wrong Answer: " + wrong + "</h1>");
+				$("#container").append("<h1>Correct Answers: " + correct + "</h1>");
+				$("#container").append("<h1>Incorrect Answers: " + wrong + "</h1>");
 				$("#container").append("<h1>Unanswered: " + unanswered + "</h1>");
 
 				// Create the restart button
@@ -174,7 +194,7 @@ $(function () {
 					number = 0;
 					correct = 0;
 					wrong = 0;
-					unanswered = 0;
+					unanswered = 0
 					refreshPage();
 
 				})
@@ -184,8 +204,6 @@ $(function () {
 
 	}
 
-	// START GAME ===============================================
-	refreshPage();
 });
 
 

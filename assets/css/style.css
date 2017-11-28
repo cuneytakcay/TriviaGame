@@ -64,13 +64,17 @@ button:hover {
 	margin-top: 150px;
 }
 
-#btn-restart {
+#btn-start, #btn-restart {
 	width: 30%;
 	height: 80px;
 	background-color: #ff9900;
 	font-size: 32px;
 }
 
-#btn-restart:hover {
+#btn-start:hover, #btn-restart:hover {
 	background-color: #ffb84d;
+}
+
+#btn-start {
+	margin-top: 150px;
 }

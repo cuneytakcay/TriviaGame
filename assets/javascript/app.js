@@ -51,6 +51,8 @@ $(function () {
 	// REFRESH PAGE ====================================================
 	function refreshPage() {
 
+		var soundActive = false;
+
 		// Display the header on top -----------------------------------
 		var headerSec = $("<div id=\"header\">");
 		var logo = $("<img src=\"assets/images/trivia.png\">");
@@ -72,9 +74,18 @@ $(function () {
 			counter = "<h2>Time remaining: " + remainingTime + "</h2>";
 			timerSec.html(counter);
 
-			if (remainingTime <= 5 && remainingTime > 0) {
+			if (remainingTime <= 6 && remainingTime > 0) {
+
 				var warning = new Audio("assets/sounds/beep.wav");
-				warning.play();
+
+				if (soundActive) {
+
+					warning.play();
+					
+				}
+
+				soundActive = true;
+				
 			}
 
 			if (remainingTime === 0) {

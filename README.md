@@ -1,4 +1,4 @@
-# TriviaGame
+# Trivia Game
 
 Answer 10 trivia questions from different categories. 
 
